@@ -96,7 +96,7 @@ test.describe('Register Page test', ()=>{
         await expect(page).toHaveURL('https://thinking-tester-contact-list.herokuapp.com/contactList');
     })
 
-    test.only('check cancel button',async({page})=>{
+    test('check cancel button',async({page})=>{
         const register = new RegisterPage(page);
         await register.clickCancelBtn();
         await expect(page).toHaveURL('https://thinking-tester-contact-list.herokuapp.com/login');
