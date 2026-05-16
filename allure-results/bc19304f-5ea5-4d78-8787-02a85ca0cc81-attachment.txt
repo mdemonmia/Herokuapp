@@ -1,0 +1,1 @@
+invalid message: Contact validation failed: firstName: Path `firstName` is required., lastName: Path `lastName` is required.

@@ -1,0 +1,115 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: E2E.spec.js >> end to end test
+- Location: tests\E2E.spec.js:11:5
+
+# Error details
+
+```
+Test timeout of 60000ms exceeded.
+```
+
+```
+Error: locator.click: Test timeout of 60000ms exceeded.
+Call log:
+  - waiting for locator('#edit-contact')
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - heading "Contact List" [level=1] [ref=e4]
+      - button "Logout" [ref=e5]
+    - paragraph [ref=e6]: Click on any contact to view the Contact Details
+    - paragraph [ref=e7]:
+      - button "Add a New Contact" [ref=e8]
+    - table [ref=e10]:
+      - rowgroup [ref=e11]:
+        - row "Name Birthdate Email Phone Address City, State/Province, Postal Code Country" [ref=e12]:
+          - columnheader "Name" [ref=e13]
+          - columnheader "Birthdate" [ref=e14]
+          - columnheader "Email" [ref=e15]
+          - columnheader "Phone" [ref=e16]
+          - columnheader "Address" [ref=e17]
+          - columnheader "City, State/Province, Postal Code" [ref=e18]
+          - columnheader "Country" [ref=e19]
+      - rowgroup
+      - row "dilruba akter 2000-05-28 dilrubaakterdiparpicse00002@gmail.com 01738438619 Uttara,Dhaka Sector-11 Dhaka Uttara 1206 Bangladesh" [ref=e20]:
+        - cell "dilruba akter" [ref=e21]
+        - cell "2000-05-28" [ref=e22]
+        - cell "dilrubaakterdiparpicse00002@gmail.com" [ref=e23]
+        - cell "01738438619" [ref=e24]
+        - cell "Uttara,Dhaka Sector-11" [ref=e25]
+        - cell "Dhaka Uttara 1206" [ref=e26]
+        - cell "Bangladesh" [ref=e27]
+  - contentinfo [ref=e28]:
+    - paragraph [ref=e29]: Created by Kristin Jackvony, Copyright 2021
+    - img [ref=e30]
+```
+
+# Test source
+
+```ts
+  1  | import { expect } from '@playwright/test';  
+  2  | export class contactdetailsPage{
+  3  |     constructor(page){
+  4  |         this.page=page;
+  5  |         this.editContactBtn = page.locator('#edit-contact');
+  6  |         this.deleteContactBtn = page.locator('#delete');
+  7  |         this.returnContactBtn = page.locator('#return');
+  8  |         this.logoutBtn = page.locator('#logout');
+  9  |         this.firstNameInput = page.locator('#firstName');
+  10 |         this.lastNameInput = page.locator('#lastName');
+  11 |         this.emailInput = page.locator('#email');
+  12 |         this.phoneInput = page.locator('#phone');
+  13 |         this.SubmitBtn = page.locator('#submit');
+  14 |         this.CancelBtn = page.locator('#cancel');
+  15 |         this.Firstname = page.locator('#firstName');
+  16 |         this.Lastname = page.locator('#lastName');
+  17 |     }
+  18 | 
+  19 |     async clickEditContactBtn(){
+> 20 |         await this.editContactBtn.click();
+     |                                   ^ Error: locator.click: Test timeout of 60000ms exceeded.
+  21 |     }
+  22 | 
+  23 |     async getEditContact(contact){
+  24 |         await this.firstNameInput.fill(contact.firstname);
+  25 |         await this.lastNameInput.fill(contact.lastname);
+  26 |         await this.emailInput.fill(contact.email);
+  27 |         await this.phoneInput.fill(contact.phone);
+  28 |         await this.SubmitBtn.click();
+  29 |     }
+  30 | 
+  31 |     async clickDeleteContactBtn(){
+  32 |         this.page.on('dialog', async (dialog) =>{
+  33 |             expect(dialog.message()).toContain('Are you sure you want to delete this contact?');
+  34 |             await dialog.accept();
+  35 |         })
+  36 |         await this.deleteContactBtn.click();
+  37 |     }
+  38 | 
+  39 |     async returnContactListBtn(){
+  40 |         await this.returnContactBtn.click();
+  41 |     }
+  42 | 
+  43 |     async getfirstName(){
+  44 |         return await this.firstNameInput.inputValue();
+  45 |     }
+  46 | 
+  47 |     async getlastName(){
+  48 |         return await this.lastNameInput.inputValue();
+  49 |     }
+  50 | 
+  51 | }
+```

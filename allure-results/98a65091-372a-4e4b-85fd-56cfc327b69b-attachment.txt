@@ -1,0 +1,8 @@
+✅ step 1 — registered successfully
+✅ step 2 — contact added successfully
+clicking contact: dilruba akter
+navigated to: https://thinking-tester-contact-list.herokuapp.com/contactDetails
+✅ step 3 — contact clicked successfully
+✅ step 4 — contact updated successfully
+✅ step 5 — contact deleted successfully
+✅ step 6 — logout successfully

@@ -1,0 +1,53 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: LoginPage.spec.js >> Login Test >> Invalid data for email and click to submit button
+- Location: tests\LoginPage.spec.js:17:9
+
+# Error details
+
+```
+Error: expect(received).toContain(expected) // indexOf
+
+Expected substring: "Incorrect username or password"
+Received string:    ""
+```
+
+# Test source
+
+```ts
+  1  | import { test,expect } from '@playwright/test';
+  2  | import { LoginPage } from '../pages/LoginPage';
+  3  | import { testData } from '../fixtures/testData';
+  4  | 
+  5  | const data = new testData();
+  6  |  
+  7  | test.describe('Login Test', ()=>{
+  8  |     test.beforeEach(async({page})=>{
+  9  |         const login = new LoginPage(page)
+  10 |         await login.goto(data.url);
+  11 |     })
+  12 | 
+  13 |     test.afterEach(async({page})=>{
+  14 |         await page.close();
+  15 |     })
+  16 | 
+  17 |     test('Invalid data for email and click to submit button',async({page})=>{
+  18 |         const login = new LoginPage(page)
+  19 |         await login.Login(
+  20 |             data.login_user.invalidEmail_login.email,
+  21 |             data.login_user.invalidEmail_login.password
+  22 |         )
+  23 | 
+  24 |          const errorMsg=await login.getErrorMsg();
+> 25 |          await expect(errorMsg).toContain('Incorrect username or password');
+     |                                 ^ Error: expect(received).toContain(expected) // indexOf
+  26 |          console.log(errorMsg);
+  27 |     })
+  28 | })
+```

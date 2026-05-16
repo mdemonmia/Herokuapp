@@ -1,0 +1,1 @@
+row 0 → td0: "6a0612b0e887ac00154e44f4" | td1: "dilruba akter" | td2: ""
