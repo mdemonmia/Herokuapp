@@ -45,7 +45,7 @@ test.describe('test contact details page', ()=>{
         expect(page).toHaveURL('https://thinking-tester-contact-list.herokuapp.com/contactList');   
     })
 
-    test.only('test return to contact list page',async({page})=>{
+    test('test return to contact list page',async({page})=>{
         const contactdetails = new contactdetailsPage(page);
         await page.waitForSelector('#edit-contact');
         await contactdetails.returnContactListBtn();

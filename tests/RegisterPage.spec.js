@@ -1,6 +1,6 @@
 import { test,expect } from '@playwright/test';
 import { LoginPage } from '../pages/loginPage';
-import { RegisterPage } from '../pages/RegisterPage';
+import { RegisterPage } from '../pages/registerPage';
 import { testData } from '../fixtures/testData';
 
 const data = new testData();
