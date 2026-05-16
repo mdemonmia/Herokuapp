@@ -68,12 +68,12 @@ export class contactlistPage{
     // }
 
     async clickContact(name){
-    console.log('clicking contact:', name);
-    await this.page.locator('.contactTableBodyRow')
-        .filter({ hasText: name })
-        .click();
-    await this.page.waitForURL(/contactDetails/);
-    console.log('navigated to:', this.page.url());
+        console.log('clicking contact:', name);
+        await this.page.locator('.contactTableBodyRow')
+            .filter({ hasText: name })
+            .click();
+        await this.page.waitForURL(/contactDetails/);
+        console.log('navigated to:', this.page.url());
 }
     async clickCancelBtn(){
         await this.cancelBtn.click();
